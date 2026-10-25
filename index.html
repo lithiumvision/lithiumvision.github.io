@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07111e">
+  <meta name="description" content="Flux & Firmware — an electrical engineering project portfolio focused on power electronics, PCB design, and embedded systems.">
+  <title>Flux & Firmware — Electrical Engineering Projects</title>
+  <style>
+    :root{color-scheme:dark;--bg:#07111e;--panel:#0c1928;--line:#22384d;--text:#eef5fa;--muted:#a1b3c2;--mint:#67e8d2;--blue:#79aef2;--orange:#ffbd78;--max:1160px}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:radial-gradient(ellipse at 80% 4%,#10273a 0,transparent 34rem),var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.6}
+    a{color:inherit}
+    a:focus-visible{outline:2px solid var(--mint);outline-offset:4px}
+    .wrap{width:min(var(--max),calc(100% - 48px));margin:auto}
+    .topbar{height:76px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #22384d88}
+    .brand{display:flex;gap:12px;align-items:center;text-decoration:none;font-weight:750;letter-spacing:.02em}
+    .mark{width:38px;height:38px;border:1px solid #67e8d288;border-radius:12px;display:grid;place-items:center;color:var(--mint);font:700 14px ui-monospace,monospace;box-shadow:inset 0 0 22px #67e8d21a}
+    nav{display:flex;gap:30px;align-items:center}
+    nav a{color:var(--muted);font-size:14px;text-decoration:none;transition:color .2s}
+    nav a:hover{color:var(--mint)}
+    .nav-cta{padding:9px 14px;border:1px solid var(--line);border-radius:8px}
+    .hero{position:relative;min-height:590px;display:grid;grid-template-columns:1.02fr .98fr;gap:36px;align-items:center;padding:66px 0 78px;overflow:hidden}
+    .hero-copy{position:relative;z-index:2}
+    .eyebrow,.label{font:600 11px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--mint)}
+    .eyebrow{display:flex;align-items:center;gap:11px}
+    .led{width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 14px var(--mint);animation:blink 2s ease-in-out infinite}
+    h1{font-size:clamp(44px,6.2vw,76px);line-height:1.02;letter-spacing:-.055em;max-width:650px;margin:23px 0}
+    h1 span{color:var(--mint)}
+    .lead{font-size:18px;max-width:570px;color:var(--muted);margin:0 0 26px}
+    .tags{display:flex;flex-wrap:wrap;gap:9px;margin:28px 0 34px}
+    .tag{border:1px solid #294158;border-radius:999px;padding:7px 12px;font-size:12px;color:#c7d6e1;background:#0c192899}
+    .actions{display:flex;gap:12px;flex-wrap:wrap}
+    .button{display:inline-flex;align-items:center;gap:10px;padding:12px 17px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:650;transition:transform .2s,border-color .2s,background .2s}
+    .button:hover{transform:translateY(-2px)}
+    .primary{background:var(--mint);color:#08141e}
+    .secondary{border:1px solid #314c65;color:var(--text)}
+    .secondary:hover{border-color:var(--mint)}
+    .visual{min-width:0;position:relative}
+    .board{width:100%;height:auto;filter:drop-shadow(0 24px 40px #0007)}
+    .board-frame{fill:#0a1724;stroke:#36546e;stroke-width:1}
+    .trace{fill:none;stroke:url(#circuit);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .pulse{fill:none;stroke:#dcfff8;stroke-width:3;stroke-dasharray:14 500;filter:url(#softglow);animation:flow 4s linear infinite}
+    .pulse.two{animation-duration:5.4s;animation-delay:-2s;stroke:#c2dcff}
+    .node{fill:#0a1724;stroke:var(--mint);stroke-width:2}
+    .block{fill:#0d2030;stroke:#526e88;stroke-width:1.4}
+    .wave{fill:none;stroke:var(--orange);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:160;animation:wave 3.5s ease-in-out infinite}
+    .visual-caption{display:flex;justify-content:space-between;color:#8096a9;font:10px ui-monospace,monospace;letter-spacing:.1em;margin:0 8px}
+    .section{padding:76px 0;border-top:1px solid #22384d88}
+    .section-head{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:28px}
+    .section h2{font-size:clamp(29px,4vw,42px);letter-spacing:-.04em;line-height:1.1;margin:9px 0 0}
+    .section-intro{color:var(--muted);max-width:480px;margin:0}
+    .projects{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+    .card{position:relative;background:linear-gradient(145deg,#102034,#0a1724 72%);border:1px solid #294158;border-radius:14px;padding:25px;min-height:245px;overflow:hidden;transition:transform .25s,border-color .25s}
+    .card:hover{transform:translateY(-4px);border-color:#67e8d288}
+    .card:after{content:"";position:absolute;width:130px;height:130px;right:-62px;top:-62px;border:1px solid #67e8d233;border-radius:50%;box-shadow:0 0 0 18px #67e8d20b,0 0 0 38px #67e8d207}
+    .card-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}
+    .number{font:12px ui-monospace,monospace;color:var(--mint)}
+    .chip{border:1px solid #38516a;border-radius:6px;padding:5px 8px;color:#a8c0d6;font:10px ui-monospace,monospace;text-transform:uppercase;letter-spacing:.08em}
+    .card h3{font-size:21px;line-height:1.25;margin:0 0 10px}
+    .card p{color:var(--muted);font-size:14px;max-width:490px;margin:0 0 20px}
+    .card-link{color:var(--mint);text-decoration:none;font-size:13px;font-weight:650}
+    .card-link span{display:inline-block;transition:transform .2s}.card-link:hover span{transform:translateX(4px)}
+    .process{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid #294158;border-radius:14px;overflow:hidden}
+    .step{padding:20px;border-right:1px solid #294158;background:#0b1926}
+    .step:last-child{border:0}
+    .step b{display:block;font:12px ui-monospace,monospace;color:var(--mint);margin-bottom:9px}
+    .step span{font-size:14px;color:#c6d2dc}
+    .footer{border-top:1px solid #22384d88;padding:24px 0 38px;color:#8499aa;font-size:12px;display:flex;justify-content:space-between;gap:16px}
+    .footer a{text-decoration:none;color:#c0d0dc}.footer a:hover{color:var(--mint)}
+    @keyframes flow{from{stroke-dashoffset:514}to{stroke-dashoffset:0}}
+    @keyframes wave{0%,100%{stroke-dashoffset:160;opacity:.45}50%{stroke-dashoffset:0;opacity:1}}
+    @keyframes blink{0%,100%{opacity:.55}50%{opacity:1}}
+    @media(max-width:820px){.hero{grid-template-columns:1fr;gap:40px;padding-top:55px;min-height:auto}.visual{max-width:680px}.section-head{align-items:start;flex-direction:column}.process{grid-template-columns:repeat(2,1fr)}.step:nth-child(2){border-right:0}.step:nth-child(-n+2){border-bottom:1px solid #294158}}
+    @media(max-width:560px){.wrap{width:min(var(--max),calc(100% - 32px))}.topbar{height:66px}nav{gap:14px}nav a{font-size:12px}nav .hide-small{display:none}.nav-cta{padding:8px 10px}.hero{padding:49px 0 57px}h1{font-size:49px}.lead{font-size:16px}.section{padding:58px 0}.projects{grid-template-columns:1fr}.card{min-height:220px;padding:21px}.process{grid-template-columns:1fr 1fr}.step{padding:15px 12px}.footer{flex-direction:column}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+  </style>
+</head>
+<body>
+  <header class="wrap topbar">
+    <a class="brand" href="#" aria-label="Flux and Firmware home"><span class="mark">F/F</span><span>Flux &amp; Firmware</span></a>
+    <nav aria-label="Main navigation">
+      <a class="hide-small" href="#projects">Projects</a>
+      <a class="hide-small" href="#approach">Approach</a>
+      <a class="nav-cta" href="https://github.com/fluxandfirmware">GitHub ↗</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="led"></span> Electrical engineering / project log</div>
+        <h1 id="hero-title">Turning schematics into <span>working hardware.</span></h1>
+        <p class="lead">A hands-on portfolio exploring power conversion, circuit boards, and embedded systems — built one testable idea at a time.</p>
+        <div class="tags" aria-label="Focus areas">
+          <span class="tag">Power electronics</span><span class="tag">PCB design</span><span class="tag">Embedded systems</span>
+        </div>
+        <div class="actions">
+          <a class="button primary" href="#projects">Explore the builds <span aria-hidden="true">↓</span></a>
+          <a class="button secondary" href="https://github.com/fluxandfirmware">View GitHub <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <div class="visual" aria-label="Animated circuit board illustration">
+        <svg class="board" viewBox="0 0 640 390" role="img" aria-labelledby="board-title board-desc">
+          <title id="board-title">Circuit signals in motion</title>
+          <desc id="board-desc">Animated traces connect a power stage, microcontroller, and PCB with an oscilloscope waveform.</desc>
+          <defs>
+            <linearGradient id="circuit" x1="0" x2="1"><stop stop-color="#67e8d2"/><stop offset="1" stop-color="#79aef2"/></linearGradient>
+            <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#9bb8d4" opacity=".18"/></pattern>
+            <filter id="softglow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          </defs>
+          <rect x="8" y="8" width="624" height="374" rx="20" class="board-frame"/>
+          <rect x="8" y="8" width="624" height="374" rx="20" fill="url(#dots)"/>
+          <g class="trace">
+            <path d="M36 88H130V125H214V76H312V108H384V70H492V111H604"/>
+            <path d="M36 190H118V225H212V176H296V205H380V245H470V188H604"/>
+            <path d="M36 300H140V266H236V305H320V278H418V314H530V281H604"/>
+          </g>
+          <path class="pulse" d="M36 88H130V125H214V76H312V108H384V70H492V111H604"/>
+          <path class="pulse two" d="M36 190H118V225H212V176H296V205H380V245H470V188H604"/>
+          <g>
+            <circle class="node" cx="130" cy="88" r="5"/><circle class="node" cx="214" cy="125" r="5"/><circle class="node" cx="312" cy="76" r="5"/>
+            <circle class="node" cx="118" cy="190" r="5"/><circle class="node" cx="296" cy="225" r="5"/><circle class="node" cx="470" cy="245" r="5"/>
+            <circle class="node" cx="140" cy="300" r="5"/><circle class="node" cx="320" cy="266" r="5"/><circle class="node" cx="530" cy="314" r="5"/>
+          </g>
+          <g>
+            <rect class="block" x="472" y="38" width="122" height="52" rx="8"/>
+            <text x="533" y="60" fill="#9db2c5" font-size="9" text-anchor="middle" font-family="monospace">POWER STAGE</text>
+            <text x="533" y="77" fill="#eef5fa" font-size="13" text-anchor="middle" font-family="monospace">DC / DC</text>
+            <rect class="block" x="480" y="157" width="114" height="58" rx="8"/>
+            <text x="537" y="181" fill="#9db2c5" font-size="9" text-anchor="middle" font-family="monospace">CONTROL</text>
+            <text x="537" y="198" fill="#eef5fa" font-size="13" text-anchor="middle" font-family="monospace">MCU</text>
+            <rect class="block" x="498" y="264" width="96" height="48" rx="8"/>
+            <text x="546" y="284" fill="#9db2c5" font-size="9" text-anchor="middle" font-family="monospace">LAYOUT</text>
+            <text x="546" y="300" fill="#eef5fa" font-size="13" text-anchor="middle" font-family="monospace">PCB</text>
+          </g>
+          <path class="wave" d="M280 350h49l15-20 17 36 20-51 17 35h60"/>
+          <text x="34" y="354" fill="#8096a9" font-family="monospace" font-size="9" letter-spacing="1.2">SIGNAL / 01</text>
+        </svg>
+        <div class="visual-caption"><span>POWER · CONTROL · MEASURE</span><span>V1.0</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="projects" aria-labelledby="projects-title">
+      <div class="section-head">
+        <div><div class="label">Selected work / 01–02</div><h2 id="projects-title">Built to be tested.</h2></div>
+        <p class="section-intro">Each project starts with a practical electrical problem, then moves through design, simulation, layout, and hardware documentation.</p>
+      </div>
+      <div class="projects">
+        <article class="card">
+          <div class="card-top"><span class="number">01 / POWER CONVERSION</span><span class="chip">DC–DC</span></div>
+          <h3>XL6019 adjustable boost converter</h3>
+          <p>A step-up converter designed around the XL6019, targeting an adjustable output of approximately 30 V. Includes Proteus files and fabrication exports.</p>
+          <a class="card-link" href="https://github.com/fluxandfirmware/xl6019-boost-converter">Open project <span aria-hidden="true">→</span></a>
+        </article>
+        <article class="card">
+          <div class="card-top"><span class="number">02 / BENCH SUPPLY</span><span class="chip">5 V + 3.3 V</span></div>
+          <h3>Dual-rail breadboard power supply</h3>
+          <p>A compact supply concept for breadboard experiments, with regulated 5 V and 3.3 V rails and its circuit and board-layout files.</p>
+          <a class="card-link" href="https://github.com/fluxandfirmware/breadboard-power-supply-5v-3.3v">Open project <span aria-hidden="true">→</span></a>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="approach" aria-labelledby="approach-title">
+      <div class="section-head">
+        <div><div class="label">Method / repeat</div><h2 id="approach-title">Make it. Measure it. Improve it.</h2></div>
+        <p class="section-intro">The goal is a clear engineering trail: explain the design choices, share the files, and show what the hardware does.</p>
+      </div>
+      <div class="process" aria-label="Project workflow">
+        <div class="step"><b>01 / DESIGN</b><span>Define the electrical target</span></div>
+        <div class="step"><b>02 / SIMULATE</b><span>Check the circuit behavior</span></div>
+        <div class="step"><b>03 / BUILD</b><span>Lay out and assemble hardware</span></div>
+        <div class="step"><b>04 / MEASURE</b><span>Compare results and refine</span></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap footer"><span>Flux &amp; Firmware · Electrical engineering project log</span><a href="https://github.com/fluxandfirmware">GitHub ↗</a></footer>
+</body>
+</html>
