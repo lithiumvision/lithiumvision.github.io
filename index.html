@@ -69,11 +69,17 @@
     .step span{font-size:14px;color:#c6d2dc}
     .footer{border-top:1px solid #22384d88;padding:24px 0 38px;color:#8499aa;font-size:12px;display:flex;justify-content:space-between;gap:16px}
     .footer a{text-decoration:none;color:#c0d0dc}.footer a:hover{color:var(--mint)}
+    .contact-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}
+    .contact-card{background:linear-gradient(145deg,#102034,#0a1724 72%);border:1px solid #294158;border-radius:14px;padding:25px}
+    .contact-card h3{font-size:21px;margin:8px 0 10px}
+    .contact-card p{color:var(--muted);font-size:14px;margin:0 0 20px}
+    .contact-card .button{margin-top:4px}
     @keyframes flow{from{stroke-dashoffset:514}to{stroke-dashoffset:0}}
     @keyframes wave{0%,100%{stroke-dashoffset:160;opacity:.45}50%{stroke-dashoffset:0;opacity:1}}
     @keyframes blink{0%,100%{opacity:.55}50%{opacity:1}}
     @media(max-width:820px){.hero{grid-template-columns:1fr;gap:40px;padding-top:55px;min-height:auto}.visual{max-width:680px}.section-head{align-items:start;flex-direction:column}.process{grid-template-columns:repeat(2,1fr)}.step:nth-child(2){border-right:0}.step:nth-child(-n+2){border-bottom:1px solid #294158}}
     @media(max-width:560px){.wrap{width:min(var(--max),calc(100% - 32px))}.topbar{height:66px}nav{gap:14px}nav a{font-size:12px}nav .hide-small{display:none}.nav-cta{padding:8px 10px}.hero{padding:49px 0 57px}h1{font-size:49px}.lead{font-size:16px}.section{padding:58px 0}.projects{grid-template-columns:1fr}.card{min-height:220px;padding:21px}.process{grid-template-columns:1fr 1fr}.step{padding:15px 12px}.footer{flex-direction:column}}
+    @media(max-width:560px){.contact-grid{grid-template-columns:1fr}}
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
   </style>
 </head>
@@ -83,6 +89,7 @@
     <nav aria-label="Main navigation">
       <a class="hide-small" href="#projects">Projects</a>
       <a class="hide-small" href="#approach">Approach</a>
+      <a href="#contact">Contact</a>
       <a class="nav-cta" href="https://github.com/lithiumvision">GitHub ↗</a>
     </nav>
   </header>
@@ -173,6 +180,27 @@
         <div class="step"><b>02 / SIMULATE</b><span>Check the circuit behavior</span></div>
         <div class="step"><b>03 / BUILD</b><span>Lay out and assemble hardware</span></div>
         <div class="step"><b>04 / MEASURE</b><span>Compare results and refine</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="contact" aria-labelledby="contact-title">
+      <div class="section-head">
+        <div><div class="label">Get in touch / CV</div><h2 id="contact-title">Let’s talk engineering.</h2></div>
+        <p class="section-intro">For internship opportunities, project questions, or collaborations, you can reach me by email.</p>
+      </div>
+      <div class="contact-grid">
+        <article class="contact-card">
+          <div class="label">CONTACT</div>
+          <h3>Email</h3>
+          <p>Messages about electrical engineering, projects, and internship opportunities are welcome.</p>
+          <a class="button primary" href="mailto:i.chikhi2005@gmail.com">Email Ilyass <span aria-hidden="true">↗</span></a>
+        </article>
+        <article class="contact-card">
+          <div class="label">CURRICULUM VITAE</div>
+          <h3>CV · PDF</h3>
+          <p>A concise overview of my education, experience, and engineering projects.</p>
+          <a class="button secondary" href="assets/ilyass-electrical-engineering-cv.pdf" download>Download CV <span aria-hidden="true">↓</span></a>
+        </article>
       </div>
     </section>
   </main>
